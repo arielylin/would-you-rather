@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.login-header {
+  text-align: center;
+  color: #777
+}
+
+.users {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin: 0 auto;
+  padding: 3rem;
+  border: 2px solid #e3e3e3
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex: 1;
+  margin: 1rem 0;
+  justify-content: space-between;
+}
+
+.user-avatar img {
+  max-width: 50px;
+  border-radius: 50%;
+}
+
+.user-avatar {
+  flex: 1;
+}
+
+.user-name {
+  flex: 2;
+}
