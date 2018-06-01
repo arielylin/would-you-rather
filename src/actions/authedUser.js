@@ -1,8 +1,8 @@
-export const AUTHED_USER = "AUTHED_USER"
+export const AUTH_USER = "AUTH_USER";
 
-export function getAuthedUser(user) {
-   return {
-       type: AUTHED_USER,
-       user,
-   }
+export function authUser(user) {
+  return {
+    type: AUTH_USER,
+    user
+  };
 }
