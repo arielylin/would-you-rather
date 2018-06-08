@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { authUser } from "../actions/authedUser";
+import { withRouter } from "react-router";
 
 class Users extends Component {
   render() {
@@ -11,7 +12,7 @@ class Users extends Component {
           {Object.entries(users).map(([key, user]) => (
             <li key={key} className="user">
               <div className="user-avatar">
-                <img src={user.avatarURL} />
+                <img src={user.avatarURL} alt={`avatar of ${user.name}`} />
               </div>
               <div className="user-name">{user.name}</div>
               <input
@@ -27,7 +28,8 @@ class Users extends Component {
   }
 
   handleUserLogin = user => {
-    return this.props.dispatch(authUser(user));
+    this.props.dispatch(authUser(user));
+    this.props.history.push("/dashboard");
     // we need to re-route the page once the authUser action is dispatched
     // to do: get history and push new url .  import withRouter and wrap it to the component using it below
   };
@@ -39,4 +41,4 @@ function mapStateToProps({ users }) {
   };
 }
 
-export default connect(mapStateToProps)(Users);
+export default connect(mapStateToProps)(withRouter(Users));

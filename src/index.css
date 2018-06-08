@@ -28,7 +28,8 @@ body {
   justify-content: space-between;
 }
 
-.user-avatar img {
+.user-avatar img,
+.authUser-avatar img {
   max-width: 50px;
   border-radius: 50%;
 }
@@ -39,4 +40,47 @@ body {
 
 .user-name {
   flex: 2;
+}
+
+.dashboard {
+  padding: 0 4rem;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.authUser-profile {
+  display: flex;
+  align-items: center;
+}
+
+.authUser-avatar {
+  margin-right: 1rem;
+}
+
+.questions-list {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  flex-wrap: wrap;
+}
+
+.question {
+  box-shadow: 3px 3px 3px 2px #d3d3d3;
+  padding: 3rem;
+  margin: 2rem;
+}
+
+.question-card--heading {
+  font-size: 30px;
+  padding: 2rem 0;
+  font-weight: bold;
+  color: #767676;
+}
+
+.question-option {
+  padding: 5px 0;
 }
