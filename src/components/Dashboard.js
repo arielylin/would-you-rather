@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { authUser } from "../actions/authedUser";
-import Questions from "./Questions";
+import Unanswered from "./Unanswered";
+import Answered from "./Answered";
 import Nav from "./Nav";
+import { Redirect } from "react-router-dom";
 class Dashboard extends Component {
   //to do: check to see if user is logged in in componentDidMount.  If not, redirect the user to the login page
 
-  // component state for tracking active tab
+  // component state
   state = {
     activeTab: 0
   };
@@ -23,15 +25,21 @@ class Dashboard extends Component {
     switch (this.state.activeTab) {
       default:
       case 0:
-        return <Questions questions={this.props.unansweredQuestions} />;
+        return (
+          <Unanswered
+            questions={this.props.unansweredQuestions}
+            authedUser={this.props.authedUser}
+          />
+        );
       case 1:
-        return <Questions questions={this.props.answeredQuestions} />;
+        return <Answered questions={this.props.answeredQuestions} />;
     }
   }
 
   render() {
     const { authedUser, unansweredQuestions, answeredQuestions } = this.props;
 
+    if (this.props.authedUser === null) return <Redirect to="/" />;
     return (
       <div className="dashboard">
         <div className="dashboard-header">
@@ -53,13 +61,15 @@ class Dashboard extends Component {
   }
 }
 
-function mapStateToProps({ authedUser, questions }) {
+function mapStateToProps({ authedUser, questions, users }) {
   return {
-    authedUser: authedUser,
+    authedUser: authedUser ? users[authedUser.id] : null,
+    // make questions object in array and filter
     unansweredQuestions: Object.entries(questions)
       .filter(([questionId, question]) => {
         return authedUser.answers[questionId] === undefined;
       })
+      // use reduce to re-make object
       .reduce((accum, [questionId, question]) => {
         accum[questionId] = question;
         return accum;
@@ -75,7 +85,5 @@ function mapStateToProps({ authedUser, questions }) {
       }, {})
   };
 }
-
-//to do: take questions out of state and filter to show unanswered and answered
 
 export default connect(mapStateToProps)(Dashboard);

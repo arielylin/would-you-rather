@@ -1,6 +1,7 @@
 import { getUsers } from "../actions/users";
 import { getQuestions } from "../actions/questions";
 import { getInitialData } from "../api";
+import { authUser } from "./authedUser";
 
 export function handleInitialData() {
   return dispatch => {
@@ -10,5 +11,3 @@ export function handleInitialData() {
     });
   };
 }
-
-// can i somehow get all data instead of only using those methods for getting specific data

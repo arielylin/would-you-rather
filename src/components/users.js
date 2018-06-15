@@ -30,8 +30,6 @@ class Users extends Component {
   handleUserLogin = user => {
     this.props.dispatch(authUser(user));
     this.props.history.push("/dashboard");
-    // we need to re-route the page once the authUser action is dispatched
-    // to do: get history and push new url .  import withRouter and wrap it to the component using it below
   };
 }
 

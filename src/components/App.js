@@ -5,6 +5,7 @@ import { handleInitialData } from "../actions/shared";
 import { BrowserRouter } from "react-router-dom";
 import { Switch, Route } from "react-router";
 import Dashboard from "./Dashboard";
+import Answered from "./Answered";
 
 class App extends Component {
   componentDidMount() {
@@ -12,6 +13,7 @@ class App extends Component {
   }
 
   render() {
+    const { questions } = this.props;
     return (
       // to do: router goes here
       <div className="App">
@@ -19,6 +21,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Login} />
             <Route path="/dashboard" component={Dashboard} />
+            {/* <Route path={`/questions:${questions.id}`} component={Answered} /> */}
           </Switch>
         </BrowserRouter>
       </div>
@@ -26,4 +29,8 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+function mapStateToProps(questions) {
+  questions: questions;
+}
+
+export default connect(mapStateToProps)(App);
