@@ -5,7 +5,7 @@ import { handleInitialData } from "../actions/shared";
 import { BrowserRouter } from "react-router-dom";
 import { Switch, Route } from "react-router";
 import Dashboard from "./Dashboard";
-import Answered from "./Answered";
+import Vote from './Vote'
 
 class App extends Component {
   componentDidMount() {
@@ -21,7 +21,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Login} />
             <Route path="/dashboard" component={Dashboard} />
-            {/* <Route path={`/questions:${questions.id}`} component={Answered} /> */}
+            <Route render={() =>{ return <Vote/>}} />
           </Switch>
         </BrowserRouter>
       </div>

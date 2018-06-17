@@ -1,55 +1,27 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom'
 import { connect } from "react-redux";
-import { _saveQuestionAnswer } from "../_DATA";
-import { handleInitialData } from "../actions/shared";
-import { authUser } from "../actions/authedUser";
+import Vote from './Vote'
+
 
 class Unanswered extends Component {
-  handleVotes = (answer, key) => {
-    _saveQuestionAnswer({
-      authedUser: this.props.authedUser.id,
-      qid: key,
-      answer: answer
-    })
-      .then(() => {
-        return this.props.dispatch(handleInitialData());
-      })
-      .then(() => {
-        return this.props.dispatch(
-          authUser(this.props.users[this.props.authedUser.id])
-        );
-      });
-  };
-
   render() {
-    const { questions, authedUser, dispatch } = this.props;
-
+    const { questions } = this.props;
+    console.log({questions})
     return (
       <div className="question-card">
         <ul className="questions-list">
           {Object.entries(questions).map(([key, question]) => {
             return (
+              <Link to={`questions/${key}`} render={() => { return <Vote questions={questions}/>}}>
               <li key={key} className="question">
                 <div className="question-card--heading">
                   Would You Rather...
                 </div>
-                <div className="question-option">
-                  <input
-                    type="checkbox"
-                    className="vote-checkbox"
-                    onClick={() => this.handleVotes("optionOne", key)}
-                  />
-                  {question.optionOne.text}
-                </div>
-                <div className="question-option">
-                  <input
-                    type="checkbox"
-                    className="vote-checkbox"
-                    onClick={() => this.handleVotes("optionTwo", key)}
-                  />
-                  {question.optionTwo.text}
-                </div>
+                <div className="question-option">{question.optionOne.text}</div>
+                <div className="question-option">{question.optionTwo.text}</div>
               </li>
+              </Link>
             );
           })}
         </ul>
@@ -58,8 +30,4 @@ class Unanswered extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return { users: state.users };
-}
-
-export default connect(mapStateToProps)(Unanswered);
+export default connect()(Unanswered);

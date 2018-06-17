@@ -5,8 +5,9 @@ import Unanswered from "./Unanswered";
 import Answered from "./Answered";
 import Nav from "./Nav";
 import { Redirect } from "react-router-dom";
+
+
 class Dashboard extends Component {
-  //to do: check to see if user is logged in in componentDidMount.  If not, redirect the user to the login page
 
   // component state
   state = {
@@ -26,10 +27,7 @@ class Dashboard extends Component {
       default:
       case 0:
         return (
-          <Unanswered
-            questions={this.props.unansweredQuestions}
-            authedUser={this.props.authedUser}
-          />
+          <Unanswered questions={this.props.unansweredQuestions}/>
         );
       case 1:
         return <Answered questions={this.props.answeredQuestions} />;
@@ -39,6 +37,7 @@ class Dashboard extends Component {
   render() {
     const { authedUser, unansweredQuestions, answeredQuestions } = this.props;
 
+    // check to see if authedUser is null - if it is, redirect them to login page
     if (this.props.authedUser === null) return <Redirect to="/" />;
     return (
       <div className="dashboard">
